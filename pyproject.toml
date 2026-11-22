@@ -1,0 +1,34 @@
+[project]
+name = "rayda-fleet-copilot"
+version = "0.1.0"
+description = "Evidence-grounded Fleet Copilot take-home"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+    "langgraph==1.1.9",
+    "openai==2.32.0",
+    "pydantic==2.12.4",
+]
+
+[project.optional-dependencies]
+native-models = [
+    "langchain>=1.2,<2",
+    "langchain-anthropic>=1.2,<2",
+    "langchain-google-genai>=4,<6",
+]
+
+[dependency-groups]
+dev = ["pytest==8.4.2"]
+
+[project.scripts]
+fleet = "fleet_copilot.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["fleet_copilot"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
